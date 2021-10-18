@@ -19,6 +19,9 @@ import br.com.personagem.vo.SchoolHouseVO;
 @Service
 public class HouseIntegracaoService {
 	
+	/**
+	 * fiel constant name 
+	 */
 	private static final String HEADER_APIKEY = "apikey";
 	
 	@Value("${url.get.houses}")
@@ -28,8 +31,9 @@ public class HouseIntegracaoService {
 	private String apiKey;
 	
 	/**
-	 * @param idHouse
-	 * @return
+	 * Method responsible for checking if the house exists
+	 * @param idHouse - identifier of {@link SchoolHouseVO}
+	 * @return the {@link Boolean} 
 	 * @throws HouseIntegracaoException
 	 */
 	public boolean isValidHouseByIdHouse(String idHouse) throws HouseIntegracaoException {
@@ -43,8 +47,9 @@ public class HouseIntegracaoService {
 	
 	
 	/**
+	 * Method responsible for get the {@link SchoolHouseVO}
 	 * @param idHouse
-	 * @return
+	 * @return {@link Optional<SchoolHouseVO>} - entity of {@link SchoolHouseVO}
 	 * @throws HouseIntegracaoException
 	 */
 	public Optional<SchoolHouseVO> getSchoolHouseByIdHouse(String idHouse) throws HouseIntegracaoException {
@@ -58,7 +63,8 @@ public class HouseIntegracaoService {
 	
 	
 	/**
-	 * @return
+	 * Method responsible for execute call with the integration
+	 * @return {@link Optional<HouseVO>} - entity of {@link HouseVO}
 	 * @throws HouseIntegracaoException
 	 */
 	private Optional<HouseVO> callHouseIntegracao() throws HouseIntegracaoException {
@@ -76,7 +82,8 @@ public class HouseIntegracaoService {
 
 
 	/**
-	 * @return
+	 * Method responsible for configuring {@link HttpHeaders}
+	 * @return {@link HttpHeaders}
 	 */
 	private HttpHeaders getHttpHeadersHouse() {
 		HttpHeaders headers = new HttpHeaders();
