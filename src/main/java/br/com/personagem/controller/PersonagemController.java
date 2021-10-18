@@ -42,7 +42,7 @@ public class PersonagemController {
 	 * @return Personagem - entity {@link Personagem} persisted
 	 */
 	@PostMapping
-	public ResponseEntity<Personagem> savePersonagem(@Valid @RequestBody PersonagemDto personagemDto) {
+	public ResponseEntity<Personagem> savePersonagem(@RequestBody @Valid PersonagemDto personagemDto) {
 		try {
 			Personagem personagem = personagemService.save(personagemDto);
 			
@@ -61,7 +61,7 @@ public class PersonagemController {
 	 * @return Personagem - entity {@link Personagem} updated
 	 */
 	@PutMapping(value = "/personagem/{id}")
-	public ResponseEntity<Personagem> updatePersonagem(@PathVariable Long id, @Valid @RequestBody PersonagemDto personagemDto) {
+	public ResponseEntity<Personagem> updatePersonagem(@PathVariable Long id, @RequestBody @Valid PersonagemDto personagemDto) {
 		try {
 			Personagem personagem = personagemService.update(id,personagemDto);
 			

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.personagem.dto.PersonagemDto;
 import br.com.personagem.exception.HouseInexistenteException;
+import br.com.personagem.exception.HouseIntegracaoException;
 import br.com.personagem.exception.PersonagemException;
 import br.com.personagem.exception.PersonagemInexistenteException;
 import br.com.personagem.mapper.PersonagemMapper;
@@ -21,6 +22,13 @@ import br.com.personagem.service.integracao.HouseIntegracaoService;
  */
 @Service
 public class PersonagemService {
+	
+	
+	/**
+	 * {@link PersonagemMapper} - responsible for mapping
+	 */
+	@Autowired
+	private PersonagemMapper mapper;
 	
 	/**
 	 * {@link PersonagemRepository} - repository responsible by provide {@link Personagem}
@@ -52,13 +60,17 @@ public class PersonagemService {
 	 */
 	public Personagem save(PersonagemDto personagemDto) throws PersonagemException {
 		//check if the house exists on system integration, if there is personagem is persisted
-		if (isHouseValid(personagemDto.getHouse())) {
-			Personagem personagem = PersonagemMapper.MAPPER.personagemDtoToPersonagem(personagemDto);
-			return personagemRepository.save(personagem);
+		try {
+			if (isHouseValid(personagemDto.getHouse())) {
+				Personagem personagem = mapper.personagemDtoToPersonagem(personagemDto);
+				return personagemRepository.save(personagem);
 
-		} else {
-			throw new HouseInexistenteException(
-					String.format("House %s não existe no cadastro parceiro", personagemDto.getHouse()));
+			} else {
+				throw new HouseInexistenteException(
+						String.format("House %s não existe no cadastro parceiro", personagemDto.getHouse()));
+			}
+		} catch ( HouseIntegracaoException e) {
+			throw new PersonagemException(e.getMessage(), e);
 		}
 		
 	}
@@ -72,9 +84,13 @@ public class PersonagemService {
 	 */
 	public Personagem update(Long idPersonagem, PersonagemDto personagemDto) throws PersonagemException {
 		//check if the house exists on system integration
-		if (!isHouseValid(personagemDto.getHouse())) {
-			throw new HouseInexistenteException(
-					String.format("House %s não existe no cadastro do parceiro", personagemDto.getHouse()));
+		try {
+			if (!isHouseValid(personagemDto.getHouse())) {
+				throw new HouseInexistenteException(
+						String.format("House %s não existe no cadastro do parceiro", personagemDto.getHouse()));
+			}
+		} catch (HouseIntegracaoException e) {
+			throw new PersonagemException(e.getMessage(), e);
 		}
 		//check if the personagem exists in the database, if there is updated
 		//If it doesn't throw an error
@@ -123,10 +139,11 @@ public class PersonagemService {
 	
 	/**
 	 * Method responsible for validating if the home exists in the integration system
-	 * @param house - name the house
+	 * @param idHouse - name the house
 	 * @return
+	 * @throws HouseIntegracaoException 
 	 */
-	private boolean isHouseValid(String house) {
-		return houseIntegracaoService.validarIdHouse(house);
+	private boolean isHouseValid(String idHouse) throws HouseIntegracaoException {
+		return houseIntegracaoService.isValidHouseByIdHouse(idHouse);
 	}
 }
