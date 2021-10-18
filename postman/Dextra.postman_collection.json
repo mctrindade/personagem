@@ -1,0 +1,105 @@
+{
+	"info": {
+		"_postman_id": "72bde986-19f7-484b-a1ae-d9322c743804",
+		"name": "Dextra",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Criação de usuário",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"marcos.dextra@dextra.com\",\r\n    \"password\": \"123456\",\r\n    \"name\": \"Marcos\"\r\n}"
+				},
+				"url": {
+					"raw": "http://us-central1-rh-challenges.cloudfunctions.net/potterApi/users",
+					"protocol": "http",
+					"host": [
+						"us-central1-rh-challenges",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"potterApi",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Recuperação das casas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		},
+		{
+			"name": "Salvar personagem",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		},
+		{
+			"name": "Atualizar personagem",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		},
+		{
+			"name": "Listar personagens",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		},
+		{
+			"name": "Recuperar personagem",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		},
+		{
+			"name": "Excluir personagem",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		}
+	]
+}
