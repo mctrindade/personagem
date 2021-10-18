@@ -11,6 +11,10 @@ import br.com.personagem.validator.PatrounsOfEnum;
 import br.com.personagem.validator.RolesOfEnum;
 import lombok.Data;
 
+/**
+ * @author Marcos.Diniz
+ *
+ */
 @Data
 public class PersonagemDto implements Serializable{
 
@@ -34,7 +38,5 @@ public class PersonagemDto implements Serializable{
 	
 	@PatrounsOfEnum(anyOf = {PatrounsEnum.FOX, PatrounsEnum.OTTER, PatrounsEnum.STAG})
 	private PatrounsEnum patronus;
-	
-	
 
 }

@@ -1,10 +1,15 @@
-package br.com.personagem.mapper;
+package br.com.personagem.mapper.impl;
 
 import org.springframework.stereotype.Component;
 
 import br.com.personagem.dto.PersonagemDto;
+import br.com.personagem.mapper.PersonagemMapper;
 import br.com.personagem.model.Personagem;
 
+/**
+ * @author Marcos.Diniz
+ *	Class responsible for implementing {@link PersonagemMapper}
+ */
 @Component
 public class PersonagemMapperImpl implements PersonagemMapper {
 

@@ -36,6 +36,11 @@ public class PersonagemController {
 		this.personagemService = personagemService;
 	}
 		
+	/**
+	 * end point responsible by persiste {@link Personagem}
+	 * @param personagemDto - new personagem {@link PersonagemDto}
+	 * @return Personagem - entity {@link Personagem} persisted
+	 */
 	@PostMapping
 	public ResponseEntity<Personagem> savePersonagem(@Valid @RequestBody PersonagemDto personagemDto) {
 		try {
@@ -49,6 +54,12 @@ public class PersonagemController {
 		
 	}
 
+	/**
+	 * end point responsible for update the personagem
+	 * @param id - identifier of {@link Personagem}
+	 * @param personagemDto - dto of {@link PersonagemDto}
+	 * @return Personagem - entity {@link Personagem} updated
+	 */
 	@PutMapping(value = "/personagem/{id}")
 	public ResponseEntity<Personagem> updatePersonagem(@PathVariable Long id, @Valid @RequestBody PersonagemDto personagemDto) {
 		try {
@@ -60,12 +71,21 @@ public class PersonagemController {
 		}
 	}
 	
+	/**
+	 * end point responsible for list all personagens
+	 * @return {@link List<Personagem>} list of Personagens
+	 */
 	@GetMapping
 	public ResponseEntity<List<Personagem>> getPersonagens() {
 		List<Personagem> listaPersonagens = personagemService.listPersonagens();
 		return new ResponseEntity<>(listaPersonagens, HttpStatus.OK);
 	}
 	
+	/**
+	 * end point responsible for get the personagem
+	 * @param id - identifier of {@link Personagem}
+	 * @return {@link Personagem} - entity of {@link Personagem}
+	 */
 	@GetMapping(value = "/personagem/{id}")
 	public ResponseEntity<Personagem> getPersonagem(@PathVariable Long id) {
 		Personagem personagem = personagemService.findPersonagemById(id)
@@ -74,6 +94,10 @@ public class PersonagemController {
 		return new ResponseEntity<>(personagem, HttpStatus.OK);
 	}
 	
+	/**
+	 * end point responsible for delete the personagem
+	 * @param id - identifier of {@link Personagem}
+	 */
 	@DeleteMapping(value = "/personagem/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void deletePersonagem(@PathVariable Long id) {
