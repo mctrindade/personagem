@@ -27,7 +27,7 @@ public class PersonagemDto implements Serializable{
 	@Size(min = 4, max = 500, message = "The length of full name must be between 4 and 500 characters.")
 	private String name;
 	
-	@RolesOfEnum(anyOf = {RolesEnum.DIRECTOR, RolesEnum.STUDENT, RolesEnum.TEACHER})
+	@RolesOfEnum(anyOf = {RolesEnum.DIRECTOR, RolesEnum.STUDENT, RolesEnum.TEACHER}, message = "Enter a valid Roles")
 	private RolesEnum role;
 	
 	@NotEmpty(message = "the school is blank!!")
@@ -36,7 +36,8 @@ public class PersonagemDto implements Serializable{
 	@NotEmpty(message = "the house is blank!!")
 	private String house;
 	
-	@PatrounsOfEnum(anyOf = {PatrounsEnum.FOX, PatrounsEnum.OTTER, PatrounsEnum.STAG})
+	
+	@PatrounsOfEnum(anyOf = {PatrounsEnum.FOX, PatrounsEnum.OTTER, PatrounsEnum.STAG}, message = "Enter a valid Patrouns")
 	private PatrounsEnum patronus;
 
 }

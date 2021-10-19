@@ -95,7 +95,7 @@ public class PersonagemService {
 		//check if the personagem exists in the database, if there is updated
 		//If it doesn't throw an error
 		return personagemRepository.findById(idPersonagem).map(personagem -> {
-			personagem = PersonagemMapper.MAPPER.personagemDtoToPersonagem(personagemDto);
+			personagem = mapper.personagemDtoToPersonagem(personagemDto);
 			personagem.setId(idPersonagem);
 			return personagemRepository.save(personagem);
 		}).orElseThrow(() -> new PersonagemInexistenteException(
@@ -135,6 +135,15 @@ public class PersonagemService {
 	 */
 	public List<Personagem> listPersonagens() {
 		return (List<Personagem>) personagemRepository.findAll();
+	}
+	
+	/**
+	 * Method responsible for list all personagens reference the house
+	 * @param house
+	 * @return
+	 */
+	public List<Personagem> listPersonagens(String house) {
+		return (List<Personagem>) personagemRepository.findByHouse(house);
 	}
 	
 	/**

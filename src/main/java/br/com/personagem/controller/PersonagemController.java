@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
@@ -26,7 +27,7 @@ import br.com.personagem.service.PersonagemService;
 
 @RestController
 @Validated
-@RequestMapping(path = "/api/personagens/v1")
+@RequestMapping(path = "/api/filme/v1")
 public class PersonagemController {
 	
 	private final PersonagemService personagemService;
@@ -41,7 +42,7 @@ public class PersonagemController {
 	 * @param personagemDto - new personagem {@link PersonagemDto}
 	 * @return Personagem - entity {@link Personagem} persisted
 	 */
-	@PostMapping
+	@PostMapping(value = "/personagem")
 	public ResponseEntity<Personagem> savePersonagem(@RequestBody @Valid PersonagemDto personagemDto) {
 		try {
 			Personagem personagem = personagemService.save(personagemDto);
@@ -75,9 +76,20 @@ public class PersonagemController {
 	 * end point responsible for list all personagens
 	 * @return {@link List<Personagem>} list of Personagens
 	 */
-	@GetMapping
+	@GetMapping(value = "/personagem/all")
 	public ResponseEntity<List<Personagem>> getPersonagens() {
 		List<Personagem> listaPersonagens = personagemService.listPersonagens();
+		return new ResponseEntity<>(listaPersonagens, HttpStatus.OK);
+	}
+	
+	/**
+	 * end point responsible for list all personagens reference the house
+	 * @param house
+	 * @return {@link List<Personagem>} list of Personagens
+	 */
+	@GetMapping(value = "/personagens")
+	public ResponseEntity<List<Personagem>> getPersonagens(@RequestParam("house") String house) {
+		List<Personagem> listaPersonagens = personagemService.listPersonagens(house);
 		return new ResponseEntity<>(listaPersonagens, HttpStatus.OK);
 	}
 	

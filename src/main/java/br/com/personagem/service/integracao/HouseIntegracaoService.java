@@ -2,6 +2,8 @@ package br.com.personagem.service.integracao;
 
 import java.util.Optional;
 
+import javax.cache.annotation.CacheResult;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -67,7 +69,8 @@ public class HouseIntegracaoService {
 	 * @return {@link Optional<HouseVO>} - entity of {@link HouseVO}
 	 * @throws HouseIntegracaoException
 	 */
-	private Optional<HouseVO> callHouseIntegracao() throws HouseIntegracaoException {
+	@CacheResult(cacheName = "houses")
+	public Optional<HouseVO> callHouseIntegracao() throws HouseIntegracaoException {
 		RestTemplate restTemplate = new RestTemplate();
 		// make an HTTP GET request with headers
 		ResponseEntity<HouseVO> response = restTemplate.exchange(urlHouses, HttpMethod.GET, new HttpEntity<String>(getHttpHeadersHouse()),
