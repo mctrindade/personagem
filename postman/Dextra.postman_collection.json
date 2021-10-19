@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "72bde986-19f7-484b-a1ae-d9322c743804",
+		"_postman_id": "fc115d80-4d65-4bdc-9497-dadfbe26f710",
 		"name": "Dextra",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -51,26 +51,94 @@
 			"name": "Recuperação das casas",
 			"request": {
 				"method": "GET",
-				"header": [],
-				"url": null
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "apikey",
+						"value": "0cfac284-c078-4be6-b0cd-a9d610d708e5",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://us-central1-rh-challenges.cloudfunctions.net/potterApi/houses",
+					"protocol": "http",
+					"host": [
+						"us-central1-rh-challenges",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"potterApi",
+						"houses"
+					]
+				}
 			},
 			"response": []
 		},
 		{
 			"name": "Salvar personagem",
 			"request": {
-				"method": "GET",
-				"header": [],
-				"url": null
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"Maria Clara F Diniz\",\r\n    \"role\":\"STUDENT\",\r\n    \"school\":\"Hogwarts School of Witchcraft and Wizardry\",\r\n    \"house\":\"1760529f-6d51-4cb1-bcb1-25087fce5bde\",\r\n    \"patronus\":\"STAG\"\r\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/api/filme/v1/personagem",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"filme",
+						"v1",
+						"personagem"
+					]
+				}
 			},
 			"response": []
 		},
 		{
 			"name": "Atualizar personagem",
 			"request": {
-				"method": "GET",
-				"header": [],
-				"url": null
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "   {\r\n        \"name\": \"Marcos Célio Diniz\",\r\n        \"role\": \"DIRECTOR\",\r\n        \"school\": \"Hogwarts School of Witchcraft and Wizardry\",\r\n        \"house\": \"6af40ac5-edf4-4030-8b0c-b2fd97328cb4\",\r\n        \"patronus\": \"OTTER\"\r\n    }"
+				},
+				"url": {
+					"raw": "localhost:8080/api/filme/v1/personagem/2",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"filme",
+						"v1",
+						"personagem",
+						"2"
+					]
+				}
 			},
 			"response": []
 		},
@@ -78,8 +146,60 @@
 			"name": "Listar personagens",
 			"request": {
 				"method": "GET",
-				"header": [],
-				"url": null
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/api/filme/v1/personagem/all",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"filme",
+						"v1",
+						"personagem",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar personagens por casa",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/api/filme/v1/personagens?house=1760529f-6d51-4cb1-bcb1-25087fce5bde",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"filme",
+						"v1",
+						"personagens"
+					],
+					"query": [
+						{
+							"key": "house",
+							"value": "1760529f-6d51-4cb1-bcb1-25087fce5bde"
+						}
+					]
+				}
 			},
 			"response": []
 		},
@@ -88,16 +208,42 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": null
+				"url": {
+					"raw": "localhost:8080/api/filme/v1/personagem/2",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"filme",
+						"v1",
+						"personagem",
+						"2"
+					]
+				}
 			},
 			"response": []
 		},
 		{
 			"name": "Excluir personagem",
 			"request": {
-				"method": "GET",
+				"method": "DELETE",
 				"header": [],
-				"url": null
+				"url": {
+					"raw": "localhost:8080/api/personagens/v1/personagem/2",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"personagens",
+						"v1",
+						"personagem",
+						"2"
+					]
+				}
 			},
 			"response": []
 		}
