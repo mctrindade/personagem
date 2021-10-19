@@ -16,27 +16,22 @@ public class ApplicationAdvice {
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public ResponseEntity<Object> handleValidationErrors(MethodArgumentNotValidException ex) {
 		BindingResult bindingResult = ex.getBindingResult();
-		
-		ApiErrors apiErrors =  new ApiErrors(bindingResult.getAllErrors().stream().map(objectError -> objectError.getDefaultMessage())
-				.collect(Collectors.toList()));
-		
+		ApiErrors apiErrors = new ApiErrors(bindingResult.getAllErrors().stream()
+				.map(objectError -> objectError.getDefaultMessage()).collect(Collectors.toList()));
 		return new ResponseEntity<Object>(apiErrors, HttpStatus.BAD_REQUEST);
 	}
 
 	@ExceptionHandler(ResponseStatusException.class)
 	public ResponseEntity<Object> handleResponseStatusException(ResponseStatusException ex) {
 		String messageErro = ex.getReason();
-		HttpStatus status = ex.getStatus();
 		ApiErrors apiErrors = new ApiErrors(messageErro);
-		return new ResponseEntity<Object>(apiErrors, status);
+		return new ResponseEntity<Object>(apiErrors,  ex.getStatus());
 	}
-	
+
 	@ExceptionHandler(RuntimeException.class)
 	public ResponseEntity<Object> handleRuntimeException(RuntimeException ex) {
 		String messageErro = ex.getMessage();
-
 		ApiErrors apiErrors = new ApiErrors(messageErro);
-
 		return new ResponseEntity<Object>(apiErrors, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 }
